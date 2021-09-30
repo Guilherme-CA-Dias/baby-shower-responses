@@ -1,4 +1,4 @@
-var SpreadsheetID = "1hLXA7qmGk1t43ZeFahmROssUkhaGHCLFL9FZ3ZhS0dU";
+var SpreadsheetID = "";
 
 function sendEmails(){
 
