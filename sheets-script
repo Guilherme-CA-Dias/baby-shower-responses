@@ -1,0 +1,54 @@
+var SpreadsheetID = "1hLXA7qmGk1t43ZeFahmROssUkhaGHCLFL9FZ3ZhS0dU";
+
+function sendEmails(){
+
+  var ss = SpreadsheetApp.openById(SpreadsheetID)
+
+  var ssforms = ss.getSheetByName("Respostas ao formulário 1");
+  var sslinks = ss.getSheetByName("Cópia de Lista de presentes");
+
+  var row_ultima_entrada = ssforms.getLastRow();
+
+  //Pegar o nome, email e o presente
+  var email = ssforms.getRange(row_ultima_entrada, 6).getValue();
+  
+  
+  
+  var presente = ssforms.getRange(row_ultima_entrada, 2).getValue();
+  
+  var array1 = [{}];
+  var arraylink = [{}];
+
+  array1 = presente.split(", ");
+
+  var nome = ssforms.getRange(row_ultima_entrada, 4).getValue();
+
+  //Usa o presente para selecionar o link
+
+  for (var i = 0; i < array1.length; i++){
+  var search_string = array1[i];
+  var textFinder = sslinks.createTextFinder(search_string);
+  var search_row = textFinder.findNext().getRow();
+
+  var link = sslinks.getRange(search_row, 2).getValue();
+
+  arraylink[i] = link
+  }
+  //envia email
+if (email != ""){
+  if (i < 2){
+  var emailAddress = email;
+  var message = 'Oi ' + nome + ', obrigado por confirmar. Vi aqui que você falou que vai dar de presente ' + presente + ' para a Isabela,  muito obrigado! Segue um link para facilitar sua compra ' + arraylink.join(["\n", "\n"]);
+  var subject = 'Chá de bebê da Isabela';
+  MailApp.sendEmail(emailAddress, subject, message);
+  }
+else {
+  var emailAddress = email;
+  var message = 'Oi ' + nome + ', obrigado por confirmar. Vi aqui que você falou que vai dar de presentes ' + presente + ' para a Isabela,  muito obrigado! Seguem alguns links para facilitar sua compra ' + arraylink.join(["\n", "\n"]);
+  var subject = 'Chá de bebê da Isabela';
+  MailApp.sendEmail(emailAddress, subject, message);
+}
+
+
+}
+}
