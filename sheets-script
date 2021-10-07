@@ -44,7 +44,7 @@ if (email != ""){
   }
 else {
   var emailAddress = email;
-  var message = 'Oi ' + nome + ', obrigado por confirmar. Vi aqui que você falou que vai dar de presentes ' + presente + ' para a Isabela,  muito obrigado! Seguem alguns links para facilitar sua compra ' + arraylink.join(["\n", "\n"]);
+  var message = 'Oi ${nome}, obrigado por confirmar. Vi aqui que você falou que vai dar de presentes ${presente} para a Isabela,  muito obrigado! Seguem alguns links para facilitar sua compra ' + arraylink.join(["\n", "\n"]);
   var subject = 'Chá de bebê da Isabela';
   MailApp.sendEmail(emailAddress, subject, message);
 }
